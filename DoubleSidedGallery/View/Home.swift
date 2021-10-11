@@ -53,6 +53,11 @@ struct Home: View {
                                         .opacity(currentPost == post.id ? 1 : 0)
                                 )
                                 .id(post.id)
+                                .onTapGesture {
+                                    withAnimation {
+                                        currentPost = post.id
+                                    }
+                                }
                         }
                     }
                     .padding(.horizontal)
