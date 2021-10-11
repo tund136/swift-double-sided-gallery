@@ -31,8 +31,29 @@ struct Home: View {
                 .ignoresSafeArea()
             }
         }
-        .ignoresSafeArea()
         .tabViewStyle(.page(indexDisplayMode: .never))
+        .ignoresSafeArea()
+        // Bottom image view
+        .overlay(
+            // Scroll View reader to navigate to current image
+            ScrollViewReader { proxy in
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 15) {
+                        ForEach(posts) { post in
+                            Image(post.postImage)
+                                .resizable()
+                                .aspectRatio(contentMode: .fill)
+                                .frame(width: 70, height: 60)
+                                .cornerRadius(10)
+                        }
+                    }
+                    .padding(.horizontal)
+                }
+                .frame(height: 80)
+                .background(Color.black.opacity(0.5).ignoresSafeArea())
+            },
+            alignment: .bottom
+        )
         // Inserting sample post images
         .onAppear {
             for index in 1...9 {
