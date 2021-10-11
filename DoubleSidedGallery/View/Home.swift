@@ -11,8 +11,22 @@ struct Home: View {
     // Posts
     @State var posts: [Post] = []
     
+    // Current Image
+    @State var currentPost: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        // Double Side Gallery
+        TabView(selection: $currentPost) {
+            ForEach(posts) { post in
+                
+            }
+        }
+        // Inserting sample post images
+        .onAppear {
+            for index in 1...9 {
+                posts.append(Post(postImage: "post\(index)"))
+            }
+        }
     }
 }
 
