@@ -18,9 +18,21 @@ struct Home: View {
         // Double Side Gallery
         TabView(selection: $currentPost) {
             ForEach(posts) { post in
-                
+                // Getting screen size for image
+                GeometryReader { proxy in
+                    let size = proxy.size
+                    
+                    Image(post.postImage)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: size.width, height: size.height)
+                }
+                .tag(post.id)
+                .ignoresSafeArea()
             }
         }
+        .ignoresSafeArea()
+        .tabViewStyle(.page(indexDisplayMode: .never))
         // Inserting sample post images
         .onAppear {
             for index in 1...9 {
