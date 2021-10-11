@@ -49,7 +49,8 @@ struct Home: View {
                 }
             }
                 .foregroundColor(Color.white)
-                .padding(),
+                .padding()
+                .background(BlurView(style: .systemUltraThinMaterialDark).ignoresSafeArea()),
             alignment: .top
         )
         // Bottom image view
@@ -82,7 +83,7 @@ struct Home: View {
                     .padding(.horizontal)
                 }
                 .frame(height: 80)
-                .background(Color.black.opacity(0.5).ignoresSafeArea())
+                .background(BlurView(style: .systemUltraThinMaterialDark).ignoresSafeArea())
                 // While CurrentPost changing moving the current image view to center of scroll view
                 .onChange(of: currentPost) { _ in
                     withAnimation {
