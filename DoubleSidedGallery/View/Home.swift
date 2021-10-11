@@ -52,12 +52,19 @@ struct Home: View {
                                         .strokeBorder(Color.white, lineWidth: 2)
                                         .opacity(currentPost == post.id ? 1 : 0)
                                 )
+                                .id(post.id)
                         }
                     }
                     .padding(.horizontal)
                 }
                 .frame(height: 80)
                 .background(Color.black.opacity(0.5).ignoresSafeArea())
+                // While CurrentPost changing moving the current image view to center of scroll view
+                .onChange(of: currentPost) { _ in
+                    withAnimation {
+                        proxy.scrollTo(currentPost, anchor: .bottom)
+                    }
+                }
             },
             alignment: .bottom
         )
