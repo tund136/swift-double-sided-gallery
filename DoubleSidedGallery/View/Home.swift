@@ -14,6 +14,8 @@ struct Home: View {
     // Current Image
     @State var currentPost: String = ""
     
+    @State var fullPreview: Bool = false
+    
     var body: some View {
         // Double Side Gallery
         TabView(selection: $currentPost) {
@@ -33,6 +35,11 @@ struct Home: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
+        .onTapGesture {
+            withAnimation {
+                fullPreview.toggle()
+            }
+        }
         // Top detail view
         .overlay(
             HStack {
@@ -50,7 +57,10 @@ struct Home: View {
             }
                 .foregroundColor(Color.white)
                 .padding()
-                .background(BlurView(style: .systemUltraThinMaterialDark).ignoresSafeArea()),
+                .background(BlurView(style: .systemUltraThinMaterialDark).ignoresSafeArea())
+            // Hiding top bar
+                .offset(y: fullPreview ? -150 : 0)
+            ,
             alignment: .top
         )
         // Bottom image view
@@ -90,7 +100,9 @@ struct Home: View {
                         proxy.scrollTo(currentPost, anchor: .bottom)
                     }
                 }
-            },
+            }
+            // Hiding bottom bar
+                .offset(y: fullPreview ? 150 : 0),
             alignment: .bottom
         )
         // Inserting sample post images
