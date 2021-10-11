@@ -33,6 +33,25 @@ struct Home: View {
         }
         .tabViewStyle(.page(indexDisplayMode: .never))
         .ignoresSafeArea()
+        // Top detail view
+        .overlay(
+            HStack {
+                Text("Gallery Pic")
+                    .font(.title2.bold())
+                
+                Spacer()
+                
+                Button {
+                    
+                } label: {
+                    Image(systemName: "square.and.arrow.up.fill")
+                        .font(.title2)
+                }
+            }
+                .foregroundColor(Color.white)
+                .padding(),
+            alignment: .top
+        )
         // Bottom image view
         .overlay(
             // Scroll View reader to navigate to current image
