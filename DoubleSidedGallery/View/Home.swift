@@ -45,6 +45,13 @@ struct Home: View {
                                 .aspectRatio(contentMode: .fill)
                                 .frame(width: 70, height: 60)
                                 .cornerRadius(10)
+                            // Showing ring for current image
+                                .padding(2)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 10)
+                                        .strokeBorder(Color.white, lineWidth: 2)
+                                        .opacity(currentPost == post.id ? 1 : 0)
+                                )
                         }
                     }
                     .padding(.horizontal)
@@ -59,6 +66,8 @@ struct Home: View {
             for index in 1...9 {
                 posts.append(Post(postImage: "post\(index)"))
             }
+            
+            currentPost = posts.first?.id ?? ""
         }
     }
 }
